@@ -61,6 +61,18 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public Optional<ProductEntity> delete(int id) {
-        return Optional.empty();
+        // find data
+        ProductEntity entity = this.repository.findById(id).orElse(null);
+        if(entity == null) {
+            return Optional.empty();
+        }
+
+        // save ke database
+        try {
+            this.repository.delete(entity);
+            return Optional.of(entity);
+        }catch (Exception e) {
+            return Optional.empty();
+        }
     }
 }
