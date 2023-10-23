@@ -28,8 +28,7 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public Product getById(@PathVariable("id") int id){
-        Product anu = new Product(id,"Product Test",10_000L);
-        return anu;
+    public ProductEntity getById(@PathVariable("id") int id){
+        return this.service.getById(id).orElse(null);
     }
 }
