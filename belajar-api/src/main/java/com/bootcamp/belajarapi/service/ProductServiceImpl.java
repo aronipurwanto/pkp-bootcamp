@@ -3,6 +3,7 @@ package com.bootcamp.belajarapi.service;
 import com.bootcamp.belajarapi.entity.ProductEntity;
 import com.bootcamp.belajarapi.model.ProductModel;
 import com.bootcamp.belajarapi.repository.ProductRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,17 +32,35 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public Optional<ProductEntity> save(ProductModel request) {
-        ProductEntity entity = ProductEntity.builder()
-                .name(request.getName())
-                .description(request.getDescription())
-                .price(request.getPrice())
-                .build();
-
+        ProductEntity entity = new ProductEntity(request);
         try {
             this.repository.saveAndFlush(entity);
             return Optional.of(entity);
         }catch (Exception e) {
             return Optional.empty();
         }
+    }
+
+    @Override
+    public Optional<ProductEntity> update(ProductModel request, int id) {
+        // find data
+        ProductEntity entity = this.repository.findById(id).orElse(null);
+        if(entity == null) {
+            return Optional.empty();
+        }
+        // update data
+        BeanUtils.copyProperties(request, entity);
+        // save ke database
+        try {
+            this.repository.saveAndFlush(entity);
+            return Optional.of(entity);
+        }catch (Exception e) {
+            return Optional.empty();
+        }
+    }
+
+    @Override
+    public Optional<ProductEntity> delete(int id) {
+        return Optional.empty();
     }
 }

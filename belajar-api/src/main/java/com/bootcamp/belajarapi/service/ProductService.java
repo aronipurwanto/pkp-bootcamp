@@ -10,4 +10,6 @@ public interface ProductService {
     List<ProductEntity> getAll();
     Optional<ProductEntity> getById(int id);
     Optional<ProductEntity> save(ProductModel request);
+    Optional<ProductEntity> update(ProductModel request, int id);
+    Optional<ProductEntity> delete(int id);
 }

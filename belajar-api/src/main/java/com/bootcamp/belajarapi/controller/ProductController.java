@@ -3,6 +3,7 @@ package com.bootcamp.belajarapi.controller;
 import com.bootcamp.belajarapi.entity.ProductEntity;
 import com.bootcamp.belajarapi.model.ProductModel;
 import com.bootcamp.belajarapi.service.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +30,18 @@ public class ProductController {
     }
 
     @PostMapping
-    public ProductEntity save(@RequestBody ProductModel request){
+    public ProductEntity save(@Valid @RequestBody ProductModel request){
         return this.service.save(request).orElse(null);
+    }
+
+    @PatchMapping("/{id}")
+    public ProductEntity update(@Valid @RequestBody ProductModel request,
+                                @PathVariable("id") int id){
+        return this.service.update(request, id).orElse(null);
+    }
+
+    @DeleteMapping("/{id}")
+    public ProductEntity delete(@PathVariable("id") int id){
+        return this.service.delete(id).orElse(null);
     }
 }

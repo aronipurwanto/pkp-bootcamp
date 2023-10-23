@@ -1,10 +1,12 @@
 package com.bootcamp.belajarapi.entity;
 
+import com.bootcamp.belajarapi.model.ProductModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.BeanUtils;
 
 @Data
 @NoArgsConstructor
@@ -26,4 +28,8 @@ public class ProductEntity {
 
     @Column(name = "product_price")
     private Long price;
+
+    public ProductEntity(ProductModel model) {
+        BeanUtils.copyProperties(model, this);
+    }
 }
