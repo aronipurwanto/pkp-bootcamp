@@ -29,6 +29,6 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public ProductEntity getById(@PathVariable("id") int id){
-        return this.service.getById(id).orElse(null);
+        return this.service.getById(id).orElse(new ProductEntity());
     }
 }
