@@ -2,14 +2,15 @@ package com.bootcamp.belajarapi.service;
 
 import com.bootcamp.belajarapi.entity.ProductEntity;
 import com.bootcamp.belajarapi.model.ProductModel;
+import com.bootcamp.belajarapi.model.ProductResponse;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface ProductService {
-    List<ProductEntity> getAll();
-    Optional<ProductEntity> getById(int id);
-    Optional<ProductEntity> save(ProductModel request);
-    Optional<ProductEntity> update(ProductModel request, int id);
-    Optional<ProductEntity> delete(int id);
+    List<ProductResponse> getAll();
+    Optional<ProductResponse> getById(int id);
+    Optional<ProductResponse> save(ProductModel request);
+    Optional<ProductResponse> update(ProductModel request, int id);
+    Optional<ProductResponse> delete(int id);
 }

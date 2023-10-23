@@ -2,6 +2,7 @@ package com.bootcamp.belajarapi.controller;
 
 import com.bootcamp.belajarapi.entity.ProductEntity;
 import com.bootcamp.belajarapi.model.ProductModel;
+import com.bootcamp.belajarapi.model.ProductResponse;
 import com.bootcamp.belajarapi.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,28 +21,28 @@ public class ProductController {
     }
 
     @GetMapping
-    public List<ProductEntity> getAll(){
+    public List<ProductResponse> getAll(){
         return this.service.getAll();
     }
 
     @GetMapping("/{id}")
-    public ProductEntity getById(@PathVariable("id") int id){
-        return this.service.getById(id).orElse(new ProductEntity());
+    public ProductResponse getById(@PathVariable("id") int id){
+        return this.service.getById(id).orElse(null);
     }
 
     @PostMapping
-    public ProductEntity save(@Valid @RequestBody ProductModel request){
+    public ProductResponse save(@Valid @RequestBody ProductModel request){
         return this.service.save(request).orElse(null);
     }
 
     @PatchMapping("/{id}")
-    public ProductEntity update(@Valid @RequestBody ProductModel request,
+    public ProductResponse update(@Valid @RequestBody ProductModel request,
                                 @PathVariable("id") int id){
         return this.service.update(request, id).orElse(null);
     }
 
     @DeleteMapping("/{id}")
-    public ProductEntity delete(@PathVariable("id") int id){
+    public ProductResponse delete(@PathVariable("id") int id){
         return this.service.delete(id).orElse(null);
     }
 }
