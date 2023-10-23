@@ -29,6 +29,13 @@ public class ProductEntity {
     @Column(name = "product_price")
     private Long price;
 
+    @Column(name = "category_id")
+    private Integer categoryId;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_id", insertable = false, updatable = false)
+    private CategoryEntity category;
+
     public ProductEntity(ProductModel model) {
         BeanUtils.copyProperties(model, this);
     }
