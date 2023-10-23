@@ -1,15 +1,11 @@
 package com.bootcamp.belajarapi.controller;
 
 import com.bootcamp.belajarapi.entity.ProductEntity;
-import com.bootcamp.belajarapi.model.Product;
+import com.bootcamp.belajarapi.model.ProductModel;
 import com.bootcamp.belajarapi.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -30,5 +26,10 @@ public class ProductController {
     @GetMapping("/{id}")
     public ProductEntity getById(@PathVariable("id") int id){
         return this.service.getById(id).orElse(new ProductEntity());
+    }
+
+    @PostMapping
+    public ProductEntity save(@RequestBody ProductModel request){
+        return new ProductEntity();
     }
 }
