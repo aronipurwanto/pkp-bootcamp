@@ -30,6 +30,6 @@ public class ProductController {
 
     @PostMapping
     public ProductEntity save(@RequestBody ProductModel request){
-        return new ProductEntity();
+        return this.service.save(request).orElse(null);
     }
 }
